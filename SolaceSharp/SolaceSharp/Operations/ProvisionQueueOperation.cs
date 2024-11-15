@@ -16,7 +16,6 @@ namespace SolaceSharp.Operations
         private readonly Guid _corrolationKey;
         private readonly TaskCompletionSource<bool> _source;
 
-
         public ProvisionQueueOperation(
             ISession session,
             string queue,
@@ -37,7 +36,7 @@ namespace SolaceSharp.Operations
             {
                 MaxMsgSize = 1024 * 1024,
                 Permission = EndpointProperties.EndpointPermission.Consume,
-                AccessType =  EndpointProperties.EndpointAccessType.NonExclusive,
+                AccessType = EndpointProperties.EndpointAccessType.NonExclusive,
             };
 
             var q = ContextFactory.Instance.CreateQueue(_queue);

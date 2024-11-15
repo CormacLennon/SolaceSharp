@@ -14,7 +14,7 @@ namespace SolaceSharp.Operations
         private readonly TaskCompletionSource<bool> _source = new TaskCompletionSource<bool>();
 
         public ReplyOperation(
-            ISession session, 
+            ISession session,
             IMessage reply,
             IMessage request,
             bool fireAndForget)
@@ -33,8 +33,8 @@ namespace SolaceSharp.Operations
             var res = _session.SendReply(_request, _reply);
             if (res != ReturnCode.SOLCLIENT_OK && res != ReturnCode.SOLCLIENT_IN_PROGRESS)
                 _source.SetException(new UnexpectedResponseException(res.ToString()));
-                //Acks to reply messages dont have a CorrolationKey so we set now
-                // this api is so crap yo
+            //Acks to reply messages dont have a CorrolationKey so we set now
+            // this api is so crap yo
             _source.SetResult(true);
         }
 

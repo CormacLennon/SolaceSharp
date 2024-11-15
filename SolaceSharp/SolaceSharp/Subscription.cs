@@ -23,7 +23,7 @@ namespace SolaceSharp
         private readonly ChannelWriter<IMessage> _writer;
 
         private readonly SessionWrapper _session;
-        internal IDispatchTarget DispatchTarget { get; set;}
+        internal IDispatchTarget DispatchTarget { get; set; }
 
         internal Subscription(
             SessionWrapper session,
@@ -31,7 +31,7 @@ namespace SolaceSharp
         {
             _session = session;
             _transformer = transformer;
-            
+
             var opts = new UnboundedChannelOptions()
             {
                 SingleReader = true,
@@ -44,14 +44,7 @@ namespace SolaceSharp
 
         internal void MessageHandler(object sender, MessageEventArgs e)
         {
-            bool success;
-            do
-            {
-                success = _writer.TryWrite(e.Message);
-                if (!success)
-                    Thread.Sleep(1);
-            }
-            while (!success);
+            _writer.TryWrite(e.Message);
         }
 
         public IAsyncEnumerable<Message<T>> AsAsyncEnumerable(CancellationToken token = default)

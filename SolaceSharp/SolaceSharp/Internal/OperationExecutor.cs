@@ -12,7 +12,6 @@ namespace SolaceSharp.Internal
         private readonly CancellationTokenSource _cts;
         private readonly Task _executeLoop;
         private int _disposed;
-
         public OperationExecutor()
         {
             //TODO: Make configurable

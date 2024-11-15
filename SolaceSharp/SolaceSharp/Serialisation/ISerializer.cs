@@ -9,7 +9,7 @@ namespace SolaceSharp.Serialisation
 
     public interface ISerializer<T> : ISerializer
     {
-       void Serialise(IBufferWriter<byte> buffer, T source);
+        void Serialise(IBufferWriter<byte> buffer, T source);
         T Deserialise(ReadOnlySpan<byte> buffer);
     }
 }

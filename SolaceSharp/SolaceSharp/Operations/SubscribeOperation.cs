@@ -49,7 +49,6 @@ namespace SolaceSharp.Operations
 
         public void HandleException(Exception ex) => _source.SetException(ex);
 
-
         public void HandleResponse(SessionEventArgs args)
         {
             switch (args.Event)

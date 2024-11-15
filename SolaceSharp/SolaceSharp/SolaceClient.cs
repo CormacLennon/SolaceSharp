@@ -31,16 +31,16 @@ namespace SolaceSharp
         ValueTask ConnectAsync(CancellationToken token);
         Task PublishAsync<T>(T payload, PublishMeta meta, CancellationToken cancellationToken);
         Task<PublishFuture> PublishConcurrentAsync<T>(T payload, PublishMeta meta, CancellationToken cancellationToken);
-        Task<ISubscription<T>>  SubscribeAsync<T>(string topic, CancellationToken token);
+        Task<ISubscription<T>> SubscribeAsync<T>(string topic, CancellationToken token);
         Task<TOut> SendRequest<TIn, TOut>(TIn request, PublishMeta meta, TimeSpan timeout, CancellationToken cancellationToken);
 
         // Persistent messaging
-     /*   Task CreateQueue(QueueConfig config, CancellationToken token);
-        Task CreateOrUpdateQueue(QueueConfig config, CancellationToken token);
-        Task PurgeQueue(CancellationToken token);
-        Task DeleteQueue(CancellationToken token);
-        Task<QueueConsumer> ConsumeQueue();
-     */
+        /*   Task CreateQueue(QueueConfig config, CancellationToken token);
+           Task CreateOrUpdateQueue(QueueConfig config, CancellationToken token);
+           Task PurgeQueue(CancellationToken token);
+           Task DeleteQueue(CancellationToken token);
+           Task<QueueConsumer> ConsumeQueue();
+        */
 
     }
 
@@ -73,10 +73,6 @@ namespace SolaceSharp
             return _session.ConnectAsync(token);
         }
 
-        private void HandleMessageEvent(object s, MessageEventArgs msg)=> _session.HandleMessageEvent(s, msg);
-
-        private void HandleSessionEvent(object s, SessionEventArgs args) => _session.HandleSessionEvent(s, args);
-
         public async Task PublishAsync<T>(
             T payload,
             PublishMeta meta,
@@ -108,8 +104,6 @@ namespace SolaceSharp
             return _session.SubscribeAsync<T>(topic, _transformer, token);
         }
 
-
-
         public async Task<TOut> SendRequest<TIn, TOut>(
             TIn request,
             PublishMeta meta,
@@ -133,5 +127,9 @@ namespace SolaceSharp
         {
             Console.WriteLine("Message Received");
         }
+
+        private void HandleMessageEvent(object s, MessageEventArgs msg) => _session.HandleMessageEvent(s, msg);
+
+        private void HandleSessionEvent(object s, SessionEventArgs args) => _session.HandleSessionEvent(s, args);
     }
 }

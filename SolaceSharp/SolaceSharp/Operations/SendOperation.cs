@@ -50,7 +50,7 @@ namespace SolaceSharp.Operations
                     Thread.Sleep(1);
                     continue;
                 }
-                if(_fireAndforget)
+                if (_fireAndforget)
                     _source.SetResult(SendResponse.Ack);
                 return;
             }

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using SolaceSharp.Utils;
 
 namespace SolaceSharp.Serialisation
@@ -17,7 +14,7 @@ namespace SolaceSharp.Serialisation
             {
                 return serializer;
             }
-            serializer =  new JsonSerializer<T>();
+            serializer = new JsonSerializer<T>();
             _serialisers[typeof(T)] = serializer;
             return serializer;
         }

@@ -2,12 +2,10 @@ using System;
 
 namespace SolaceSharp
 {
-
     public class ConnectionFailedException : Exception
     {
         public ConnectionFailedException(string info) : base(info)
         {
-
         }
     }
 
@@ -32,12 +30,11 @@ namespace SolaceSharp
     public class RejectedMessageException : Exception
     {
     }
-    
+
     public class CreateSubscriptionException : Exception
     {
         public CreateSubscriptionException(string message) : base(message)
         {
-
         }
     }
 

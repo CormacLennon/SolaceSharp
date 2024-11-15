@@ -9,7 +9,6 @@ namespace SolaceSharp.Operations
     {
         private readonly TaskCompletionSource<bool> _source;
         private readonly ISession _session;
-
         private readonly IDispatchTarget _target;
         private readonly Guid _corrolationKey;
 

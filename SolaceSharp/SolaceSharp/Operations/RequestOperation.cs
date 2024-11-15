@@ -1,10 +1,6 @@
 ﻿using PooledAwait;
 using SolaceSystems.Solclient.Messaging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace SolaceSharp.Operations
@@ -16,7 +12,7 @@ namespace SolaceSharp.Operations
         private Guid _id;
         private readonly TaskCompletionSource<IMessage> _source = new TaskCompletionSource<IMessage>();
 
-        public RequestOperation (ISession session, IMessage message)
+        public RequestOperation(ISession session, IMessage message)
         {
             _session = session;
             _message = message;
@@ -30,7 +26,7 @@ namespace SolaceSharp.Operations
             while (true)
             {
                 var res = _session.SendRequest(_message, out var _, 0);
-                if(res != ReturnCode.SOLCLIENT_OK && res != ReturnCode.SOLCLIENT_IN_PROGRESS)
+                if (res != ReturnCode.SOLCLIENT_OK && res != ReturnCode.SOLCLIENT_IN_PROGRESS)
                     _source.SetException(new UnexpectedResponseException(res.ToString()));
                 return;
             }
