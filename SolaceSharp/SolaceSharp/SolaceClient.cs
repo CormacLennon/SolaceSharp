@@ -29,10 +29,10 @@ namespace SolaceSharp
     public interface ISolaceClient
     {
         ValueTask ConnectAsync(CancellationToken token);
-        Task PublishAsync<T>(T payload, PublishMeta meta, CancellationToken cancellationToken);
-        Task<PublishFuture> PublishConcurrentAsync<T>(T payload, PublishMeta meta, CancellationToken cancellationToken);
-        Task<ISubscription<T>> SubscribeAsync<T>(string topic, CancellationToken token);
-        Task<TOut> SendRequest<TIn, TOut>(TIn request, PublishMeta meta, TimeSpan timeout, CancellationToken cancellationToken);
+        ValueTask PublishAsync<T>(T payload, PublishMeta meta, CancellationToken cancellationToken);
+        ValueTask<PublishFuture> PublishConcurrentAsync<T>(T payload, PublishMeta meta, CancellationToken cancellationToken);
+        ValueTask<ISubscription<T>> SubscribeAsync<T>(string topic, CancellationToken token);
+        ValueTask<TOut> SendRequest<TIn, TOut>(TIn request, PublishMeta meta, TimeSpan timeout, CancellationToken cancellationToken);
 
         // Persistent messaging
         /*   Task CreateQueue(QueueConfig config, CancellationToken token);
@@ -73,7 +73,7 @@ namespace SolaceSharp
             return _session.ConnectAsync(token);
         }
 
-        public async Task PublishAsync<T>(
+        public async ValueTask PublishAsync<T>(
             T payload,
             PublishMeta meta,
             CancellationToken cancellationToken = default)
@@ -90,7 +90,7 @@ namespace SolaceSharp
             }
         }
 
-        public async Task<PublishFuture> PublishConcurrentAsync<T>(
+        public async ValueTask<PublishFuture> PublishConcurrentAsync<T>(
             T payload,
             PublishMeta meta,
             CancellationToken cancellationToken = default)
@@ -99,12 +99,12 @@ namespace SolaceSharp
             return await _session.SendConcurrentAsync(msg, cancellationToken);
         }
 
-        public Task<ISubscription<T>> SubscribeAsync<T>(string topic, CancellationToken token = default)
+        public async ValueTask<ISubscription<T>> SubscribeAsync<T>(string topic, CancellationToken token = default)
         {
-            return _session.SubscribeAsync<T>(topic, _transformer, token);
+            return await _session.SubscribeAsync<T>(topic, _transformer, token);
         }
 
-        public async Task<TOut> SendRequest<TIn, TOut>(
+        public async ValueTask<TOut> SendRequest<TIn, TOut>(
             TIn request,
             PublishMeta meta,
             TimeSpan timeout = default,

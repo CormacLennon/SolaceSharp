@@ -41,15 +41,12 @@ namespace SolaceSharp.Internal
                     while (reader.TryRead(out var operation))
                     {
                         if (_cts.IsCancellationRequested)
-                        {
                             continue;
-                        }
 
                         try
                         {
                             operation.Execute();
                         }
-
                         catch (Exception ex)
                         {
                             operation.HandleException(ex);
