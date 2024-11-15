@@ -8,7 +8,7 @@ Not production tested, use at own risk etc etc.
 For examples see examples project.
 
 This is mostly an POC exercise for myself after having to wrangle with the horrific sdk provided by solace,
-and it may not progress much further beyond that. Inspired by the very good NAT's dotnet api.
+and it may not progress much further beyond that. Inspired by the very good NAT's dotnet sdk.
 
 <h2>POC'd so far</h2>
 
